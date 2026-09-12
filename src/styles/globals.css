@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Draft BIM brand palette — navy blue primary with teal accent */
+  --color-brand: #1a5fa8;
+  --color-brand-dark: #144d8c;
+  --color-ink: #0c1f3d;
+  --font-sans: "Manrope", "Arial", sans-serif;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply m-0 bg-[#f8fbfc] text-ink antialiased; }
+  *, ::before, ::after { box-sizing: border-box; }
+
+  /* Strong contrast boost — all supporting/body text made clearly readable */
+  .text-slate-300 { color: #94a3b8 !important; }
+  .text-slate-400 { color: #4b5563 !important; }
+  .text-slate-500 { color: #374151 !important; }
+  .text-slate-600 { color: #1f2937 !important; }
+
+  /* Body paragraphs default color */
+  p { color: #1e293b; }
+
+  /* Small labels and captions */
+  .text-xs { color: inherit; }
+}
+
+.blueprint-grid {
+  background-image: linear-gradient(rgba(18, 169, 171, .11) 1px, transparent 1px), linear-gradient(90deg, rgba(18, 169, 171, .11) 1px, transparent 1px);
+  background-size: 34px 34px;
+}
+
+@keyframes blueprint-scan {
+  0%, 100% { transform: translateY(-120%); opacity: 0; }
+  15%, 82% { opacity: .85; }
+  50% { transform: translateY(720%); opacity: .55; }
+}
+
+@keyframes visualizer-drift {
+  0%, 100% { transform: scale(1.025) translate3d(-.4%, -.4%, 0); }
+  50% { transform: scale(1.08) translate3d(.5%, .5%, 0); }
+}
+
+@keyframes wireframe-shift {
+  0%, 100% { opacity: .28; transform: translate3d(0, 0, 0); }
+  50% { opacity: .7; transform: translate3d(8px, -6px, 0); }
+}
+
+@keyframes live-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(44, 183, 181, .42); }
+  50% { box-shadow: 0 0 0 9px rgba(44, 183, 181, 0); }
+}
+
+@keyframes typing-cursor {
+  0%, 42% { opacity: 1; }
+  43%, 100% { opacity: 0; }
+}
+
+.image-drift { animation: visualizer-drift 13s ease-in-out infinite; }
+.wireframe-pulse { animation: wireframe-shift 6s ease-in-out infinite; }
+.stage-scan { animation: blueprint-scan 5.5s ease-in-out infinite; }
+.live-pulse { animation: live-pulse 2.2s ease-out infinite; }
+.typing-cursor { animation: typing-cursor .9s steps(1, end) infinite; }
+
+/* Physical-location map is intentionally hidden until it is needed in the client journey. */
+section.border-t.border-cyan-100.bg-white.py-10 { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .image-drift, .wireframe-pulse, .stage-scan, .live-pulse, .typing-cursor { animation: none; }
+}
+
+/* ── Header responsive rules ── */
+/* Desktop (≥1024px): show nav, hide hamburger */
+@media (min-width: 1024px) {
+  .header-desktop-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 32px !important;
+  }
+  .header-hamburger {
+    display: none !important;
+  }
+  .header-mobile-menu {
+    display: none !important;
+  }
+}
+/* Mobile (<1024px): hide nav, show hamburger */
+@media (max-width: 1023px) {
+  .header-desktop-nav {
+    display: none !important;
+  }
+  .header-hamburger {
+    display: grid !important;
+  }
+}
+
+/* Header bar — force flex centering regardless of global resets */
+.header-bar {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: 80px !important;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  box-sizing: border-box;
+}
